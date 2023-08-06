@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Önce varsa Docker konteynerlerini durdur ve sil
+# Before starting, stop and remove containers if exists
 docker-compose down
 
-# Docker Compose ile Laravel projesini başlat
+# Start Laravel project with Docker Compose
 docker-compose up -d --build
 
-# Önce App konteynerine gir ve www klasörünü boşalt
+# First, enter the App container and empty the www folder
 docker-compose exec app /bin/bash -c "shopt -s dotglob && rm -rf /var/www/*"
 
-# App konteynerine gir ve Laravel projesini oluştur
+# Enter the app container and create the Laravel project#
 docker-compose exec app /bin/bash -c "composer create-project laravel/laravel /var/www/ --prefer-dist"
 
-# Gerekli izinleri düzenle
+# Change the ownership of the www folder
 docker-compose exec app /bin/bash -c "cd /var/www/ && chown -R www-data:www-data ."
