@@ -21,8 +21,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo pdo_mysql zip exif sodium gd
 
 
-# install nodejs latest version
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+# get nodejs latest version
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 
 # install nodejs and npm
 RUN apt-get update && apt-get install -y \
@@ -41,18 +41,23 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN git config --global user.name "Enes Ekinci"
 RUN git config --global user.email "enes.eknc.96@gmail.com"
 
+##
+# if you want to use ssh keys for git clone or pull you can use this lines
+#
+
 # create ssh folder
-RUN mkdir /root/.ssh
+# RUN mkdir /root/.ssh
 
 # copy ssh folder and set permissions and remove cache
-COPY ./php/ssh_files/id_rsa /root/.ssh/id_rsa
-COPY ./php/ssh_files/id_rsa.pub /root/.ssh/id_rsa.pub
-COPY ./php/ssh_files/known_hosts /root/.ssh/known_hosts
 
-RUN chmod 700 /root/.ssh
-RUN chmod 600 /root/.ssh/id_rsa
-RUN chmod 644 /root/.ssh/id_rsa.pub
-RUN chmod 644 /root/.ssh/known_hosts
+# COPY ./php/ssh_files/id_rsa /root/.ssh/id_rsa
+# COPY ./php/ssh_files/id_rsa.pub /root/.ssh/id_rsa.pub
+# COPY ./php/ssh_files/known_hosts /root/.ssh/known_hosts
+
+# RUN chmod 700 /root/.ssh
+# RUN chmod 600 /root/.ssh/id_rsa
+# RUN chmod 644 /root/.ssh/id_rsa.pub
+# RUN chmod 644 /root/.ssh/known_hosts
 
 
 # Set working directory
@@ -62,6 +67,6 @@ WORKDIR /var/www/
 RUN rm -rf *
 
 # create new laravel project
-# RUN composer create-project laravel/laravel . --prefer-dist
+RUN composer create-project laravel/laravel . --prefer-dist
 
 EXPOSE 9000
