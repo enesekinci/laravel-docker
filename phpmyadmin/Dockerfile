@@ -1,0 +1,10 @@
+FROM phpmyadmin:latest
+
+ENV PMA_HOST=mariadb_container
+ENV PMA_PORT=3306
+ENV PMADB=test_db
+ENV PMA_USER=root
+ENV PMA_PASSWORD=123456
+
+EXPOSE 9500
+
