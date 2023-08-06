@@ -1,3 +1,5 @@
 *.DS_Store
-database/mariadbdata/*
+database/mariadb/*
 redis/data/*
+app/*
+

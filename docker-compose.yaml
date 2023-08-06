@@ -38,7 +38,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./database/mariadbdata:/var/lib/mysql
+      - ./database/mariadb:/var/lib/mysql
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: 12345600

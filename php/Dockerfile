@@ -63,10 +63,4 @@ RUN git config --global user.email "enes.eknc.96@gmail.com"
 # Set working directory
 WORKDIR /var/www/
 
-# remove files that are not needed
-RUN rm -rf *
-
-# create new laravel project
-RUN composer create-project laravel/laravel . --prefer-dist
-
 EXPOSE 9000
